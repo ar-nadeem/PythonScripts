@@ -140,7 +140,7 @@ def results():
     URLResult=[]
     URLResult=list(set().union(searchB,searchY,searchG))
     for i in URLResult:
-        print (i)
+        print ((i).encode("utf-8"))
 
 def SQLI():
     print("\n\n\nChecking for SQL Vulnerability ....")
@@ -156,17 +156,17 @@ def SQLI():
         try:
             r=requests.get(SQL)
         except:
-            print("Could not Connect to the URL "+i)
+            print("Could not Connect to the URL "+i.encode("utf-8"))
         soup=BeautifulSoup(r.content,"html.parser")
         HTML=soup.get_text
         HTML=str(HTML)
         if HTML.find("SQL syntax") > -1 or HTML.find("mysqli_num_rows") > -1 or HTML.find("MySQL server") > -1 or HTML.find("mysqli_result") > -1 or HTML.find("expects parameter") > -1  :
             SQLIURL.append(i)
             print("==========================================================")
-            print (i+" Is Vulnerable !")
+            print (i.encode("utf-8")+" Is Vulnerable !")
             print("==========================================================\n\n\n\n")
         else:
-            print (i+" is not Vulnerable\n\n")
+            print (i.encode("utf-8")+" is not Vulnerable\n\n")
     if SQLIURL:
         name = str(time.strftime("%H-%M-%S--%b-%d"))
         savefile = open(name+".txt","w")
